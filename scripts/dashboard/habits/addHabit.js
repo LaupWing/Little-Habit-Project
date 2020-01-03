@@ -1,11 +1,11 @@
 import Component from '../../Component.js'
 import db from '../../db/db.js'
 class AddHabit extends Component{
-    data
+    list
     constructor(rootId){
         super(rootId)
         this.create()
-        this.getData()
+        this.dataWatcher()
     }
     create(){
         const container = document.createElement('form')
@@ -29,55 +29,51 @@ class AddHabit extends Component{
         const textarea = this.element.querySelector('textarea')
         if(input.value !== '' && textarea.value !== ''){
             this.addToDB(input.value, textarea.value)
+            input.value = ''
+            textarea.value = ''
         }else{
             alert('You have to fill in both fields')
         }
     }
-    getData(){
-        try{
-            db
-                .collection('habits')
-                .doc(firebase.auth().currentUser.uid)
-                .get()
-                .then(data=>{
-                    if(data.exists){
-                        this.data = data
-                    }else{
-                        this.data = []
-                    }
-                })
-        }catch(e){
-            console.log(e)
-        }
+    dataWatcher(){
+        db.collection('habits').onSnapshot(async (snapshot)=>{
+            snapshot.docChanges().forEach(change=>{
+                if(
+                    change.doc.id === firebase.auth().currentUser.uid && 
+                    change.doc.data().habits.length>0
+                ){
+                    this.list = change.doc.data().habits
+                }
+            })
+        })
     }
     addToDB(title, description){
-        const habits =  [...this.data]
         const newHabit = {
             title,
             description,
             createdAt: new Date(),
             checkedIn:[]
         }
-        habits.push(newHabit)
-            db
-                .collection('habits')
-                .doc(firebase.auth().currentUser.uid)
-                .update(
-                    {
-                        habits
-                    }
-                )
-                .catch(e=>{
-                    console.log(e)
-                    db
-                        .collection('habits')
-                        .doc(firebase.auth().currentUser.uid)
-                        .set(
-                            {
-                                habits
-                            }
-                        )
-                })
+
+        this.list.push(newHabit)
+        db
+            .collection('habits')
+            .doc(firebase.auth().currentUser.uid)
+            .update(
+                {
+                    habits: this.list
+                }
+            )
+            .catch(e=>{
+                db
+                    .collection('habits')
+                    .doc(firebase.auth().currentUser.uid)
+                    .set(
+                        {
+                            habits: this.list
+                        }
+                    )
+            })
         
     }
 }

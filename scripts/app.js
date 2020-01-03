@@ -11,11 +11,14 @@ class App{
         firebase.auth().onAuthStateChanged(user=>{
             this.user = user
         })
-        this.checkStatus()   
+        this.checkComponentToRender()   
     }
-    checkStatus(){
+    checkComponentToRender(){
+        document.getElementById('app').innerHTML = ''
         if(!this.user){
             new Auth('app')
+        }else{
+
         }
     }
 }

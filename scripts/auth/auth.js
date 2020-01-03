@@ -33,6 +33,12 @@ class Auth extends Component{
     
     attachAuth(){
         const authContainer = this.element.querySelector('#auth')
+        const lis = Array.from(this.element.querySelectorAll('nav li'))
+        lis.forEach(li=>li.classList.remove('active'))
+
+        const activeNav = lis.find(li=>li.id===this.active)
+        activeNav.classList.add('active')
+        console.log(activeNav)
         authContainer.innerHTML = ''
         if(this.active === 'login'){
             new Login('auth')

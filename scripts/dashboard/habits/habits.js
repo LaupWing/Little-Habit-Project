@@ -2,6 +2,8 @@ import Component from '../../Component.js';
 import db from '../../db/db.js'
 
 class Habits extends Component{
+    exists = false
+    habits = []
     constructor(rootId){
         super(rootId)
         this.create()
@@ -11,8 +13,10 @@ class Habits extends Component{
         db.collection('habits').onSnapshot(async (snapshot)=>{
             snapshot.docChanges().forEach(change=>{
                 if(change.doc.id === firebase.auth().currentUser.uid){
-                    console.log('render via data')
-                }else{
+                    this.exists = true
+                    this.habits = change.doc.data()      
+                    this.habitsList()
+                }else if(!this.exists){
                     this.zeroState()
                 }
             })
@@ -22,6 +26,10 @@ class Habits extends Component{
         this.element.innerHTML = `
             <p>Add your first habit!</p>
         `
+    }
+    habitsList(){
+        this.element.innerHTML = ''
+        console.log(this.habits)
     }
     create(){
         const container = document.createElement('div')

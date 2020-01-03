@@ -12,15 +12,21 @@ class Habit extends Component{
     create(){
         const habit = document.createElement('div')
         habit.innerHTML = `
-            <h2>${this.habit.title}</h2>
+            <header>
+                <h2>${this.habit.title}</h2>
+                <button>Delete</button>
+            </header>
             <p>${this.habit.description}</p>
-            <button>Delete</button>
         `
-        console.log(this.habit)
+        habit.className = 'habit'
         habit.querySelector('button').addEventListener('click', this.deleteHabit.bind(this))
+        habit.addEventListener('click', this.moreInfo.bind(this))
         this.element = habit
         this.attach()
     }   
+    moreInfo(event){
+        console.log(event)
+    }
     deleteHabit(){
         this.list.splice(this.id, 1)
         db.collection('habits').doc(firebase.auth().currentUser.uid).update({

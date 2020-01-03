@@ -2,6 +2,10 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    --blue: #1a3365;
+    --yellow: #ffbb00;
+    --white: #ffffff;
+    --red: #ff4343;
 }
 
 body{
@@ -10,6 +14,26 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    background: var(--white);
+    font-family: 'Open Sans', sans-serif;
+}
+button{
+    border: none;
+    border: solid var(--yellow) 2px;
+    background: transparent;
+    padding: 7px 15px;
+    border-radius: 100px;
+    color: var(--yellow);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: .5rem;
+    transition: .25s;
+    cursor: pointer;
+}
+button:hover{
+    background: var(--yellow);
+    color: var(--blue);
 }
 li{
     list-style: none;
@@ -28,4 +52,34 @@ li.active{
     position: fixed;
     top: 50px;
     right: 50px;
+}
+.habits{
+    width: 500px;
+}
+.habits .habit{
+    margin: 20px 0;
+}
+.habit header{
+    display: flex;
+    border: var(--blue) solid 3px;
+    justify-content: space-between;
+    padding: 3px;
+    border-radius: 30px;
+    color: var(--blue);
+    cursor: pointer;
+    transition: .5s;
+}
+.habit header:hover{
+    background: var(--blue);
+    color: var(--yellow);
+}
+.habit header h2{
+    width: 100%;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+.habit p{
+    max-height: 0;
+    overflow: hidden;
 }

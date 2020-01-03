@@ -38,7 +38,6 @@ class Auth extends Component{
 
         const activeNav = lis.find(li=>li.id===this.active)
         activeNav.classList.add('active')
-        console.log(activeNav)
         authContainer.innerHTML = ''
         if(this.active === 'login'){
             new Login('auth')

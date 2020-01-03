@@ -14,9 +14,9 @@ class Habit extends Component{
         habit.innerHTML = `
             <header>
                 <h2>${this.habit.title}</h2>
-                <button>Delete</button>
+                <button>Done</button>
             </header>
-            <p>${this.habit.description}</p>
+            <p class="description">${this.habit.description}</p>
         `
         habit.className = 'habit'
         habit.querySelector('button').addEventListener('click', this.deleteHabit.bind(this))
@@ -25,7 +25,17 @@ class Habit extends Component{
         this.attach()
     }   
     moreInfo(event){
-        console.log(event)
+        const container = event.target.parentElement.parentElement
+        if(container.classList.contains('active')){
+            document.querySelectorAll('.habit').forEach(habit=>{
+                habit.classList.remove('active')
+            })
+            return
+        }
+        document.querySelectorAll('.habit').forEach(habit=>{
+            habit.classList.remove('active')
+        })
+        this.element.classList.add('active')
     }
     deleteHabit(){
         this.list.splice(this.id, 1)

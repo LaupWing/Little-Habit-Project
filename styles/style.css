@@ -59,6 +59,15 @@ li.active{
 .habits .habit{
     margin: 20px 0;
 }
+.habit.active header{
+    border-radius: 20px 20px 0 0;
+}
+
+.habit.active p{
+    max-height: 1000px;
+    padding: 10px;
+    width: 100%;
+}
 .habit header{
     display: flex;
     border: var(--blue) solid 3px;
@@ -69,7 +78,8 @@ li.active{
     cursor: pointer;
     transition: .5s;
 }
-.habit header:hover{
+.habit header:hover,
+.habit.active header{
     background: var(--blue);
     color: var(--yellow);
 }
@@ -80,6 +90,14 @@ li.active{
 }
 
 .habit p{
+    width: 90%;
+    margin: auto;
     max-height: 0;
     overflow: hidden;
+    background: var(--blue);
+    color: var(--yellow);
+    transition: 
+        max-height 0.5s cubic-bezier(0, 1, 0, 1), 
+        padding 0.5s,
+        width 0.5s;
 }

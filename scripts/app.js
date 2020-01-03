@@ -1,6 +1,6 @@
 import Auth from './auth/auth.js'
 import './db/db.js'
-
+import Dashboard from './dashboard/dashboard.js'
 class App{
     user
 
@@ -19,7 +19,7 @@ class App{
         if(!this.user){
             new Auth('app')
         }else{
-
+            new Dashboard('app')
         }
     }
 }

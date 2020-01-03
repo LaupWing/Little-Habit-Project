@@ -1,8 +1,10 @@
 import Component from '../Component.js'
-
+import Profile from './profile/profile.js'
 class Dashboard extends Component{
-    constructor(){
-        super('app')
+    constructor(rootId){
+        super(rootId)
+        new Profile()
+        this.create()
     }
     create(){
         const container = document.createElement('div')

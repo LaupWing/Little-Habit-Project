@@ -1,8 +1,9 @@
 import Component from '../../Component.js'
 
-class Profiel extends Component{
+class Profile extends Component{
     constructor(){
         super('app')
+        this.create()
     }
     create(){
         const container = document.createElement('div')
@@ -11,8 +12,12 @@ class Profiel extends Component{
             <button>Logout</button>
         `
         container.querySelector('button').addEventListener('click', this.logout)
+        this.element = container
+        this.attach()
     }
     logout(){
         firebase.auth().signOut()
     }
 }
+
+export default Profile

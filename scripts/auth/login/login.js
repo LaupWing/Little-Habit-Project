@@ -20,6 +20,9 @@ class Login extends Component{
         this.element = container
         this.attach()
     }
+    async loginUser(email,password){
+        await firebase.auth().signInWithEmailAndPassword(email,password)
+    }
 
 }
 

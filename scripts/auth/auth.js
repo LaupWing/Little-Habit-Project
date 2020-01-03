@@ -3,8 +3,8 @@ import Login from './login/login.js'
 import Signup from './signup/signup.js'
 
 class Auth extends Component{
-    constructor(){
-        super('app')
+    constructor(rootId){
+        super(rootId)
         this.active = 'login'
         this.create()
     }

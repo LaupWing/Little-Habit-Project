@@ -16,7 +16,13 @@ class Habit extends Component{
                 <h2>${this.habit.title}</h2>
                 <button>Done</button>
             </header>
-            <p class="description">${this.habit.description}</p>
+            <div class="info">
+                <p class="description">${this.habit.description}</p>
+                <div class="buttons">
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
+            </div>
         `
         habit.className = 'habit'
         habit.querySelector('button').addEventListener('click', this.deleteHabit.bind(this))
